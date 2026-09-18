@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>逡ｰ逡梧羅陦檎､ｾ ｽ｣譛医∈縺ｮ譌�</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;600;800&family=DotGothic16&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0a0c11;
+    --void-deep:#050609;
+    --paper:#e6ddc4;
+    --paper-dim:#c9bd9c;
+    --verdigris:#4a6357;
+    --rust:#9c5a2e;
+    --glitch-m:#c23a73;
+    --glitch-c:#3aa6a0;
+    --ink:#1d1a14;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0; padding:0;
+    background:var(--void-deep); color:var(--paper);
+    font-family:'DotGothic16', monospace;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body{
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(230,221,196,0.5) 0, transparent 60%),
+      radial-gradient(1px 1px at 22% 68%, rgba(230,221,196,0.4) 0, transparent 60%),
+      radial-gradient(1.5px 1.5px at 38% 30%, rgba(230,221,196,0.6) 0, transparent 60%),
+      radial-gradient(1px 1px at 55% 82%, rgba(230,221,196,0.35) 0, transparent 60%),
+      radial-gradient(1.5px 1.5px at 68% 15%, rgba(230,221,196,0.55) 0, transparent 60%),
+      radial-gradient(1px 1px at 81% 55%, rgba(230,221,196,0.4) 0, transparent 60%),
+      radial-gradient(1px 1px at 92% 90%, rgba(230,221,196,0.3) 0, transparent 60%),
+      radial-gradient(1.5px 1.5px at 14% 92%, rgba(230,221,196,0.45) 0, transparent 60%),
+      linear-gradient(180deg, var(--void) 0%, var(--void-deep) 100%);
+    background-attachment:fixed;
+  }
+
+  .noise-strip{
+    position:fixed; inset:0; pointer-events:none; overflow:hidden;
+    opacity:0.045; font-size:11px; line-height:1.6; color:var(--paper);
+    writing-mode:vertical-rl; letter-spacing:4px; white-space:nowrap; z-index:0;
+  }
+
+  .sr-only{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  main{ position:relative; z-index:1; max-width:640px; margin:0 auto; padding:64px 20px 60px; }
+
+  .brochure{
+    background:var(--paper); color:var(--ink); border-radius:2px;
+    box-shadow:0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(0,0,0,0.08);
+    position:relative; overflow:hidden;
+  }
+
+  .brochure::before, .brochure::after{
+    content:""; display:block; height:3px;
+    background:linear-gradient(90deg, transparent 0%, var(--verdigris) 12%, var(--rust) 50%, var(--verdigris) 88%, transparent 100%);
+    opacity:0.75;
+  }
+  .brochure::before{ box-shadow:0 1px 0 rgba(29,26,20,0.15); }
+  .brochure::after{ box-shadow:0 -1px 0 rgba(29,26,20,0.15); }
+
+  .agency-mark{ text-align:center; padding:22px 20px 6px; font-size:11px; letter-spacing:3px; color:var(--verdigris); }
+
+  header.hero{ padding:6px 34px 30px; text-align:center; border-bottom:1px dashed var(--paper-dim); }
+  .kicker{ font-size:12px; letter-spacing:2px; color:var(--rust); margin-bottom:10px; }
+
+  h1{
+    font-family:'Shippori Mincho B1', serif; font-weight:800;
+    font-size:clamp(2.1rem, 8vw, 3rem); line-height:1.2; margin:0 0 12px;
+    position:relative; display:inline-block; letter-spacing:1px;
+  }
+  h1 .glitch{ position:relative; display:inline-block; }
+  h1 .glitch::before, h1 .glitch::after{
+    content:attr(data-text); position:absolute; left:0; top:0; width:100%; overflow:hidden; color:inherit;
+  }
+  h1 .glitch::before{ color:var(--glitch-m); clip-path:inset(0 0 88% 0); animation:glitchTop 7s infinite ease-in-out; opacity:0.7; }
+  h1 .glitch::after{ color:var(--glitch-c); clip-path:inset(82% 0 0 0); animation:glitchBottom 7s infinite ease-in-out; opacity:0.65; }
+  @keyframes glitchTop{
+    0%,88%,100%{ transform:translate(0,0); clip-path:inset(0 0 88% 0); }
+    89%{ transform:translate(-3px,-1px); clip-path:inset(10% 0 60% 0); }
+    91%{ transform:translate(2px,1px); clip-path:inset(0 0 88% 0); }
+    93%{ transform:translate(-2px,0); clip-path:inset(30% 0 40% 0); }
+  }
+  @keyframes glitchBottom{
+    0%,88%,100%{ transform:translate(0,0); clip-path:inset(82% 0 0 0); }
+    89%{ transform:translate(3px,1px); clip-path:inset(40% 0 20% 0); }
+    91%{ transform:translate(-2px,-1px); clip-path:inset(82% 0 0 0); }
+    93%{ transform:translate(2px,0); clip-path:inset(55% 0 10% 0); }
+  }
+  @media (prefers-reduced-motion: reduce){ h1 .glitch::before, h1 .glitch::after{ animation:none; opacity:0.3; } }
+
+  .tagline{ font-size:13px; color:#4a4739; letter-spacing:0.5px; line-height:1.8; }
+
+  /* ---- 実写コラージュ（本物のNASA公開写真＋星空） ---- */
+  .photo-scene{ position:relative; width:100%; overflow:hidden; background:#000; }
+  .photo-scene .stars{
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(1px 1px at 6% 15%, #fff 0, transparent 60%),
+      radial-gradient(1px 1px at 14% 55%, #fff 0, transparent 60%),
+      radial-gradient(1.4px 1.4px at 24% 25%, #fff 0, transparent 60%),
+      radial-gradient(1px 1px at 33% 70%, #fff 0, transparent 60%),
+      radial-gradient(1.2px 1.2px at 44% 12%, #fff 0, transparent 60%),
+      radial-gradient(1px 1px at 58% 45%, #fff 0, transparent 60%),
+      radial-gradient(1.3px 1.3px at 67% 20%, #fff 0, transparent 60%),
+      radial-gradient(1px 1px at 78% 60%, #fff 0, transparent 60%),
+      radial-gradient(1.2px 1.2px at 88% 30%, #fff 0, transparent 60%),
+      radial-gradient(1px 1px at 95% 65%, #fff 0, transparent 60%),
+      radial-gradient(1px 1px at 4% 40%, #fff 0, transparent 60%),
+      radial-gradient(1px 1px at 50% 8%, #fff 0, transparent 60%);
+    opacity:0.55;
+  }
+  .photo-scene .ground-img{
+    position:absolute; left:0; right:0; bottom:0; width:100%; height:70%;
+    object-fit:cover;
+    filter:grayscale(15%) contrast(1.2) brightness(0.82);
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0%, black 22%);
+    mask-image:linear-gradient(to bottom, transparent 0%, black 22%);
+  }
+  .photo-scene .earth-img{
+    position:absolute; border-radius:50%; overflow:hidden;
+    box-shadow:0 0 26px 6px rgba(90,130,190,0.25);
+  }
+  .photo-scene .earth-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  .hero-scene{ aspect-ratio: 4 / 3; }
+  .hero-scene .hero-img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; filter:grayscale(8%) contrast(1.12) brightness(0.92);
+  }
+  .second-scene{ aspect-ratio: 9 / 4; }
+  .second-scene .ground-img{ height:100%; -webkit-mask-image:linear-gradient(to bottom, transparent 0%, black 10%); mask-image:linear-gradient(to bottom, transparent 0%, black 10%); }
+
+  .decode-hint{
+    position:absolute; bottom:6px; right:10px; font-size:9px; letter-spacing:1px;
+    color:rgba(230,221,196,0.5); z-index:2;
+  }
+  .moon-stage{ position:relative; }
+  .moon-photo-b{ position:relative; }
+
+  section{ padding:28px 34px; border-bottom:1px dashed var(--paper-dim); }
+  section:last-of-type{ border-bottom:none; }
+
+  h2{ font-family:'Shippori Mincho B1', serif; font-weight:600; font-size:1.25rem; margin:0 0 14px; color:var(--ink); letter-spacing:0.5px; }
+  p{ line-height:1.9; font-size:14px; margin:0 0 12px; letter-spacing:0.3px; }
+
+  .stamp-row{ display:flex; align-items:center; gap:18px; margin:16px 0 6px; flex-wrap:wrap; }
+  .stamp{
+    border:2px solid var(--rust); color:var(--rust); border-radius:50%; width:96px; height:96px;
+    display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center;
+    transform:rotate(-8deg); font-family:'Shippori Mincho B1', serif; font-weight:800; line-height:1.15;
+    flex:0 0 auto; position:relative;
+  }
+  .stamp::before{ content:""; position:absolute; inset:6px; border:1px solid var(--rust); border-radius:50%; opacity:0.6; }
+  .stamp .num{ font-size:1.5rem; }
+
+  .access-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  .access-list li{ padding:13px 15px; background:rgba(0,0,0,0.035); border-left:3px solid var(--verdigris); }
+  .access-route{ font-size:14px; line-height:1.75; }
+  .access-time{ font-size:11px; color:var(--rust); letter-spacing:0.5px; margin-top:4px; }
+
+  /* ---- 個体ギャラリー：横スクロール（実写＋アノマリー合成） ---- */
+  .creature-scroll{
+    display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory;
+    padding:2px 34px 14px; margin:0 -34px; -webkit-overflow-scrolling:touch;
+  }
+  .creature-scroll::-webkit-scrollbar{ height:5px; }
+  .creature-scroll::-webkit-scrollbar-track{ background:transparent; }
+  .creature-scroll::-webkit-scrollbar-thumb{ background:var(--paper-dim); border-radius:3px; }
+  .creature-panel{
+    flex:0 0 76%; scroll-snap-align:start; position:relative; background:#000;
+    aspect-ratio: 4 / 3.6; overflow:hidden;
+  }
+  @media (max-width:480px){ .creature-panel{ flex-basis:88%; } }
+  .panel-photo{ position:absolute; inset:0; overflow:hidden; }
+  .panel-photo img{ width:100%; height:100%; object-fit:cover; filter:grayscale(30%) contrast(1.3) brightness(0.5); display:block; }
+  .panel-photo::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 35%, rgba(0,0,0,0.35) 65%, rgba(0,0,0,0.92) 100%);
+  }
+  .panel-creature{ position:absolute; inset:0; width:100%; height:100%; }
+  .creature-caption{
+    position:absolute; left:0; right:0; bottom:0; padding:12px 14px 10px; z-index:2;
+    color:var(--paper);
+  }
+  .creature-caption h3{ margin:0 0 3px; font-family:'Shippori Mincho B1', serif; font-weight:600; font-size:0.92rem; }
+  .creature-caption p{ margin:0; font-size:10.5px; color:var(--paper-dim); line-height:1.7; }
+  .scroll-hint{ text-align:center; font-size:10.5px; color:#8a8570; letter-spacing:1px; margin-top:2px; }
+
+  .notice{ font-size:12px; color:#5a5647; line-height:1.9; padding-left:18px; }
+  .notice li{ margin-bottom:8px; }
+
+  footer{ max-width:640px; margin:32px auto 0; text-align:center; font-size:11px; color:var(--paper-dim); letter-spacing:1px; position:relative; z-index:1; }
+  footer .seal{
+    display:inline-block; margin-top:14px; padding:8px 18px; border:1px solid var(--paper-dim);
+    border-radius:20px; color:var(--paper); font-family:'Shippori Mincho B1', serif; font-size:12px;
+  }
+
+  a, a:visited{ color:inherit; }
+  ::selection{ background:var(--glitch-m); color:var(--paper); }
+</style>
+</head>
+<body>
+
+<div class="noise-strip" aria-hidden="true">
+縺薙ｌ縺ｯ諠�ｱ縺ｮ荳驛ｨ縺後◆縺ｾ縺溘∪蟶ｸ蜷梧悄縺励※縺翫ｊ縺セ縺帙ｓ縲�繧医ｊ縺薙％繧医ｒ縺頑ｱゅ縺励∪縺吶�ゆｸ手ｨ倥・讒倅ｻｶ縺ｯ蜷梧悄辟｡蜉ｹ縺ｮ縺溘ａ陦ｨ遉ｺ縺輔ｌ縺ｾ縺帙ｓ縲�
+</div>
+
+<main>
+  <div class="brochure">
+    <div class="agency-mark">
+      逡悟沺隕ｳ蜈臥ｵ�蜷医��逋ｻ骭ｲ隨ｬ0000蜿ｷ
+      <span class="sr-only">界域観光組合　登録第0000号</span>
+    </div>
+
+    <header class="hero">
+      <div class="kicker">
+        逡ｰ逡梧羅陦檎､ｾ縲�迚ｹ蛻･譯亥��
+        <span class="sr-only">異界旅行社　特別案内</span>
+      </div>
+      <h1><span class="glitch" data-text="譛医∈縺ｮ譌�">譛医∈縺ｮ譌�</span></h1>
+      <span class="sr-only">月への旅</span>
+      <p class="tagline">
+        貅�縺｡谺�縺代�ｮ迢ｭ髢薙ｈ繧翫�√←縺ｪ縺溘＆縺ｾ繧ゅ＃譯亥��縺�縺溘＠縺ｾ縺吶��
+        <span class="sr-only">満ち欠けの狭間より、どなたさまもご案内いたします。</span>
+      </p>
+    </header>
+
+    <!-- ================= 写真1：月面パノラマ（実写・全面） ================= -->
+    <div class="moon-stage" aria-hidden="true">
+      <div class="photo-scene hero-scene">
+        <img class="hero-img" src="https://science.nasa.gov/wp-content/uploads/2023/12/apollo-15-moon-landing-21-eva1-panorama-jsc2011e118359.webp" alt="" style="object-position:50% 62%;">
+      </div>
+      <div class="decode-hint">enc: utf-8 as shift_jis</div>
+    </div>
+
+    <section>
+      <h2>
+        逶ｮ逧�蝨ｰ
+        <span class="sr-only">目的地</span>
+      </h2>
+      <p>
+        譛医�ょ慍逅�縺九ｉ繧ゅ▲縺ｨ繧りｿ代￥縲√ｂ縺｣縺ｨ繧る□縺�蝣ｴ謇�縺ｧ縺吶�よ｡亥��譚ｿ縺ｮ險�隱槭�ｯ縺吶∋縺ｦ迴ｾ蝨ｰ莉墓ｧ倥�ｮ縺溘ａ縲∝､壼ｰ題ｪｭ縺ｿ縺･繧峨￥隕九∴繧九％縺ｨ縺後≠繧翫∪縺吶′縲∝��螳ｹ縺ｫ隱､繧翫�ｯ縺斐＊縺�縺ｾ縺帙ｓ縲らｩｺ豌励�ｯ縺ゅｊ縺ｾ縺帙ｓ縺後�∵�ｯ闍ｦ縺励＆繧ゅ＃縺悶＞縺ｾ縺帙ｓ縲�
+        <span class="sr-only">月。地球からもっとも近く、もっとも遠い場所です。案内板の言語はすべて現地仕様のため、多少読みづらく見えることがありますが、内容に誤りはございません。空気はありませんが、息苦しさもございません。</span>
+      </p>
+    </section>
+
+    <section>
+      <h2>
+        縺翫☆縺吶ａ譌�陦梧律謨ｰ
+        <span class="sr-only">おすすめ旅行日数</span>
+      </h2>
+      <div class="stamp-row">
+        <div class="stamp"><span class="num">3陟ｩ4譌･</span><span class="sr-only">3泊4日</span></div>
+        <p style="flex:1; min-width:180px;">
+          貅�縺｡谺�縺代ｒ荳�蟾｡縺ｧ縺阪↑縺�遏ｭ縺輔〒縺吶′縲∵ｬ�縺代�ｯ縺倥ａ縺九ｉ貅�縺｡繧九∪縺ｧ縺ｮ豌鈴�阪�ｯ蜊∝��縺ｫ縺頑･ｽ縺励∩縺�縺溘□縺代∪縺吶�ょｻｶ豕翫�ｯ迴ｾ蝨ｰ縺ｮ陬�驥上→縺ｪ繧翫∪縺吶��
+          <span class="sr-only">満ち欠けを一巡できない短さですが、欠けはじめから満ちるまでの気配は十分にお楽しみいただけます。延泊は現地の裁量となります。</span>
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>
+        繧｢繧ｯ繧ｻ繧ｹ譁ｹ豕�
+        <span class="sr-only">アクセス方法</span>
+      </h2>
+      <ul class="access-list">
+        <li>
+          <div class="access-route">
+            蝨ｰ逅��ｼ育ｾｽ逕ｰ蝗ｽ髫帷ｩｺ貂ｯ縲�蝨ｰ荳倶ｺ秘嚴縲�蜿嶺ｻ倥�ｮ縺ｪ縺�繧ｫ繧ｦ繝ｳ繧ｿ繝ｼ�ｼ峨°繧峨Ο繧ｱ繝�繝医↓縺ｦ
+            <span class="sr-only">地球（羽田国際空港　地下五階　受付のないカウンター）からロケットにて</span>
+          </div>
+          <div class="access-time">
+            謇�隕∵凾髢薙��邏�78譎る俣
+            <span class="sr-only">所要時間　約78時間</span>
+          </div>
+        </li>
+        <li>
+          <div class="access-route">
+            荳画律譛医�ｮ螟懊�∵ｰｴ縺溘∪繧翫↓譏�縺｣縺滓怦繧帝�壹▲縺ｦ
+            <span class="sr-only">三日月の夜、水たまりに映った月を通って</span>
+          </div>
+          <div class="access-time">
+            謇�隕∵凾髢薙��縺昴�ｮ螟懊�ｮ貎ｮ菴阪↓繧医ｊ螟牙虚
+            <span class="sr-only">所要時間　その夜の潮位により変動</span>
+          </div>
+        </li>
+        <li>
+          <div class="access-route">
+            豺ｱ縺�逵�繧翫↓關ｽ縺｡縺滓婿髯仙ｮ壹�∝､｢繧堤ｵ檎罰縺励※逶ｴ騾�
+            <span class="sr-only">深い眠りに落ちた方限定、夢を経由して直通</span>
+          </div>
+          <div class="access-time">
+            謇�隕∵凾髢薙��菴捺─縺ｫ縺ｯ蛟倶ｺｺ蟾ｮ縺後＃縺悶＞縺ｾ縺�
+            <span class="sr-only">所要時間　体感には個人差がございます</span>
+          </div>
+        </li>
+        <li>
+          <div class="access-route">
+            菴ｿ繧上ｌ縺ｪ縺上↑縺｣縺溷�ｬ陦�髮ｻ隧ｱ繝懊ャ繧ｯ繧ｹ繧医ｊ縲∝香蜀�邇我ｸ�譫壹↓縺ｦ
+            <span class="sr-only">使われなくなった公衆電話ボックスより、十円玉七枚にて</span>
+          </div>
+          <div class="access-time">
+            謇�隕∵凾髢薙��荳肴�趣ｼ亥ｸｰ繧翫�ｮ蛻�縺ｯ蜷ｫ縺ｾ繧後※縺翫ｊ縺ｾ縺帙ｓ�ｼ�
+            <span class="sr-only">所要時間　不明（帰りの分は含まれておりません）</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ================= 写真2：実写コラージュ（月面クローズアップ） ================= -->
+    <div class="moon-photo-b" aria-hidden="true">
+      <div class="photo-scene second-scene">
+        <div class="stars"></div>
+        <img class="ground-img" src="https://science.nasa.gov/wp-content/uploads/2023/03/as11-40-5878-orig.jpg" alt="" style="object-position:60% 65%;">
+      </div>
+    </div>
+
+    <section>
+      <h2>
+        迴ｾ蝨ｰ縺ｧ遒ｺ隱阪＆繧後◆蛟倶ｽ�
+        <span class="sr-only">現地で確認された個体</span>
+      </h2>
+
+      <div class="creature-scroll">
+
+        <!-- 個体07 -->
+        <div class="creature-panel">
+          <div class="panel-photo">
+            <img src="https://science.nasa.gov/wp-content/uploads/2023/03/as11-40-5878-orig.jpg" alt="" style="object-position:35% 60%;">
+          </div>
+          <svg class="panel-creature" viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#cfe8c4" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#cfe8c4" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="patch1" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <ellipse cx="205" cy="330" rx="70" ry="14" fill="url(#patch1)"/>
+            <g transform="translate(205,215)">
+              <path d="M0,-95 C10,-92 14,-70 12,-45 C11,-25 16,-8 10,10 C6,30 10,55 4,85 L-4,85 C-9,55 -6,30 -10,10 C-16,-8 -11,-25 -12,-45 C-14,-70 -10,-92 0,-95 Z" fill="#0a0a0a"/>
+              <path d="M10,-40 C22,-30 30,-5 26,25 L20,25 C22,0 16,-20 8,-35 Z" fill="#0a0a0a"/>
+              <path d="M-10,-40 C-24,-28 -30,0 -24,30 L-18,30 C-22,4 -16,-18 -8,-35 Z" fill="#0a0a0a"/>
+              <ellipse cx="0" cy="-70" rx="3.2" ry="10" fill="url(#glow1)"/>
+            </g>
+          </svg>
+          <div class="creature-caption">
+            <h3>蛟倶ｽ�07<span class="sr-only">個体07</span></h3>
+            <p>逶ｴ遶九＠縺溘∪縺ｾ縲∽ｽ募香蟷ｴ繧ょ酔縺伜�ｴ謇�縺九ｉ蜍輔＞縺ｦ縺�縺ｪ縺�縲�<span class="sr-only">直立したまま、何十年も同じ場所から動いていない。</span></p>
+          </div>
+        </div>
+
+        <!-- 群体 -->
+        <div class="creature-panel">
+          <div class="panel-photo">
+            <img src="https://science.nasa.gov/wp-content/uploads/2023/03/as11-40-5878-orig.jpg" alt="" style="object-position:70% 30%;">
+          </div>
+          <svg class="panel-creature" viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="glow2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c9e8e4" stop-opacity="0.95"/><stop offset="100%" stop-color="#c9e8e4" stop-opacity="0"/></radialGradient>
+            </defs>
+            <g stroke="#0f2b28" stroke-width="1" opacity="0.85">
+              <line x1="150" y1="150" x2="200" y2="130"/><line x1="200" y1="130" x2="250" y2="145"/>
+              <line x1="250" y1="145" x2="230" y2="180"/><line x1="230" y1="180" x2="170" y2="185"/>
+              <line x1="170" y1="185" x2="150" y2="150"/><line x1="200" y1="130" x2="230" y2="180"/>
+            </g>
+            <g fill="url(#glow2)">
+              <circle cx="150" cy="150" r="14"/><circle cx="200" cy="130" r="10"/><circle cx="250" cy="145" r="16"/>
+              <circle cx="230" cy="180" r="11"/><circle cx="170" cy="185" r="13"/>
+            </g>
+            <g fill="#7fdcd2">
+              <circle cx="150" cy="150" r="3"/><circle cx="200" cy="130" r="2.4"/><circle cx="250" cy="145" r="3.4"/>
+              <circle cx="230" cy="180" r="2.6"/><circle cx="170" cy="185" r="3"/>
+            </g>
+          </svg>
+          <div class="creature-caption">
+            <h3>鄒､菴�<span class="sr-only">群体</span></h3>
+            <p>螟懊↓縺ｪ繧九→謨ｰ縺悟｢励∴繧九�よ焚縺医ｋ縺溘�ｳ縺ｫ驕輔≧縲�<span class="sr-only">夜になると数が増える。数えるたびに違う。</span></p>
+          </div>
+        </div>
+
+        <!-- 反転体 -->
+        <div class="creature-panel">
+          <div class="panel-photo">
+            <img src="https://science.nasa.gov/wp-content/uploads/2023/03/as11-40-5878-orig.jpg" alt="" style="object-position:20% 20%;">
+          </div>
+          <svg class="panel-creature" viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="glow3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#e08bb3" stop-opacity="0.9"/><stop offset="100%" stop-color="#e08bb3" stop-opacity="0"/></radialGradient>
+            </defs>
+            <ellipse cx="210" cy="325" rx="55" ry="12" fill="url(#glow3)" opacity="0.4"/>
+            <g transform="translate(210,175)">
+              <ellipse rx="42" ry="46" fill="url(#glow3)" opacity="0.35"/>
+              <path d="M0,-55 L18,-20 L48,-10 L20,12 L28,48 L0,26 L-28,48 L-20,12 L-48,-10 L-18,-20 Z" fill="#150a10" stroke="#3a1a28" stroke-width="1.5"/>
+              <path d="M0,-30 L9,-8 L0,10 L-9,-8 Z" fill="#c23a73" opacity="0.85"/>
+            </g>
+          </svg>
+          <div class="creature-caption">
+            <h3>蜿崎ｻ｢菴�<span class="sr-only">反転体</span></h3>
+            <p>谿ｻ縺ｮ蜀�蛛ｴ縺ｧ縲∝ｸｸ縺ｫ菴輔°縺檎椪縺�縺ｦ縺�繧九��<span class="sr-only">殻の内側で、常に何かが瞬いている。</span></p>
+          </div>
+        </div>
+
+        <!-- 観測者 -->
+        <div class="creature-panel">
+          <div class="panel-photo">
+            <img src="https://science.nasa.gov/wp-content/uploads/2023/03/as11-40-5878-orig.jpg" alt="" style="object-position:50% 80%;">
+          </div>
+          <svg class="panel-creature" viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="glow4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#e6ddc4" stop-opacity="0.9"/><stop offset="100%" stop-color="#e6ddc4" stop-opacity="0"/></radialGradient>
+            </defs>
+            <ellipse cx="210" cy="330" rx="60" ry="13" fill="url(#glow4)" opacity="0.3"/>
+            <g transform="translate(210,150)">
+              <line x1="-4" y1="34" x2="-14" y2="90" stroke="#181818" stroke-width="2" opacity="0.8"/>
+              <line x1="4" y1="34" x2="16" y2="88" stroke="#181818" stroke-width="2" opacity="0.8"/>
+              <line x1="0" y1="35" x2="0" y2="95" stroke="#181818" stroke-width="2" opacity="0.8"/>
+              <circle r="38" fill="#0c0c0c" stroke="#2a2a2a" stroke-width="1.5"/>
+              <circle r="30" fill="#050505"/>
+              <circle r="18" fill="url(#glow4)"/>
+              <circle r="9" fill="#0c0c0c"/>
+              <circle r="3.2" fill="#e6ddc4"/>
+            </g>
+          </svg>
+          <div class="creature-caption">
+            <h3>隕ｳ貂ｬ閠�<span class="sr-only">観測者</span></h3>
+            <p>縺薙■繧峨ｒ隕九※縺�繧九→縺励°諤昴∴縺ｪ縺�縺後�∫岼縺ｯ隕句ｽ薙◆繧峨↑縺�縲�<span class="sr-only">こちらを見ているとしか思えないが、目は見当たらない。</span></p>
+          </div>
+        </div>
+
+      </div>
+      <div class="scroll-hint">
+        讓ｪ縺ｫ繧ｹ繧ｯ繝ｭ繝ｼ繝ｫ縺励※縺碑ｦｧ縺上□縺輔＞
+        <span class="sr-only">横にスクロールしてご覧ください</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>
+        縺疲｡亥��
+        <span class="sr-only">ご案内</span>
+      </h2>
+      <ul class="notice">
+        <li>
+          縺企｣滉ｺ九�ｯ蜷ｫ縺ｾ繧後※縺翫ｊ縺ｾ縺帙ｓ縲ら樟蝨ｰ縺ｧ縺ｯ菴輔ｂ鬟溘∋繧峨ｌ縺ｪ縺�縺ｨ縺�縺�隱ｬ縺梧怏蜉帙〒縺吶��
+          <span class="sr-only">お食事は含まれておりません。現地では何も食べられないという説が有力です。</span>
+        </li>
+        <li>
+          縺雁悄逕｣縺ｫ譛医�ｮ遏ｳ繧偵♀謖√■蟶ｰ繧翫＞縺溘□縺代∪縺吶′縲∝慍逅�縺ｫ逹�縺城��縺ｫ縺ｯ蛻･縺ｮ繧ゅ�ｮ縺ｫ螟峨ｏ縺｣縺ｦ縺�繧句�ｴ蜷医′縺斐＊縺�縺ｾ縺吶��
+          <span class="sr-only">お土産に月の石をお持ち帰りいただけますが、地球に着く頃には別のものに変わっている場合がございます。</span>
+        </li>
+        <li>
+          蟶ｰ繧翫�ｮ萓ｿ縺ｯ陦後″縺ｮ萓ｿ縺ｨ蜷後§蝣ｴ謇�縺ｫ蛻ｰ逹�縺吶ｋ縺ｨ縺ｯ髯舌ｊ縺ｾ縺帙ｓ縲�
+          <span class="sr-only">帰りの便は行きの便と同じ場所に到着するとは限りません。</span>
+        </li>
+        <li>
+          蠖鍋､ｾ縺ｯ縲∵羅遞倶ｸｭ縺ｫ逕溘§縺溘＞縺九↑繧倶ｸ肴�晁ｭｰ縺ｪ蜃ｺ譚･莠九↓縺､縺�縺ｦ繧ゅ�∬ｪｬ譏弱ｒ菫晁ｨｼ縺吶ｋ繧ゅ�ｮ縺ｧ縺ｯ縺ゅｊ縺ｾ縺帙ｓ縲�
+          <span class="sr-only">当社は、旅程中に生じたいかなる不思議な出来事についても、説明を保証するものではありません。</span>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer>
+    逡ｰ逡梧羅陦檎､ｾ
+    <span class="sr-only">異界旅行社</span>
+    <div class="seal">
+      莉悶�ｮ逶ｮ逧�蝨ｰ譯亥��縺ｯ縲∝ｽ灘ｺ礼ｪ灘哨縺ｫ縺ｦ謇ｿ縺｣縺ｦ縺翫ｊ縺ｾ縺�
+      <span class="sr-only">他の目的地案内は、当店窓口にて承っております</span>
+    </div>
+  </footer>
+</main>
+
+</body>
+</html>
